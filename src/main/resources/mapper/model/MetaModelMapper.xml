@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.big.data.mapper.model.MetaModelMapper">
+    <select id="query" resultType="com.big.data.bean.model.MetaModel">
+        select
+            id,
+            name_cn nameCn,
+            name_en nameEn,
+            name_abbr nameAbbr,
+            f_desc fDesc,
+            create_by createBy,
+            create_time createTime,
+            last_update_by lastUpdateBy,
+            last_update_time lasUpdateTime
+         from t_meta_model
+    </select>
+
+    <insert id="insert">
+        insert into t_meta_model(id,
+            name_cn,
+            name_en,
+            name_abbr,
+            f_desc,
+            create_by,
+            create_time,
+            last_update_by,
+            last_update_time) values(
+            #{nameCn,jdbcType=VARCHAR},
+            #{nameEn,jdbcType=VARCHAR},
+            #{nameAbbr,jdbcType=VARCHAR},
+            #{fDesc,jdbcType=VARCHAR},
+            #{createBy,jdbcType=VARCHAR},
+            now(),
+            #{lastUpdateBy,jdbcType=VARCHAR},
+            now()
+            )
+    </insert>
+
+    <update id="update">
+        update t_meta_model set
+            f_desc = #{fDesc, jdbcType=VARCHAR},
+            last_update_by= #{fDesc, jdbcType=VARCHAR},
+            last_update_time) values(
+            #{nameCn,jdbcType=VARCHAR},
+            #{nameEn,jdbcType=VARCHAR},
+            #{nameAbbr,jdbcType=VARCHAR},
+            #{fDesc,jdbcType=VARCHAR},
+            #{createBy,jdbcType=VARCHAR},
+            now(),
+            #{lastUpdateBy,jdbcType=VARCHAR},
+            now()
+            )
+    </update>
+
+    <delete id="delete">
+        delete from t_meta_model where id =#{id}
+    </delete>
+
+
+</mapper>
