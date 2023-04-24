@@ -15,10 +15,17 @@
             last_update_by lastUpdateBy,
             last_update_time lasUpdateTime
          from t_meta_model
+         where 1=1
+        <if test="searchKey != null and searchKey !=''">
+            and name_abbr like "%"#{searchKey,jdbcType=VARCHAR}"%"
+            or name_cn like '%' "%"#{searchKey,jdbcType=VARCHAR}"%"
+            or f_desc like '%' "%"#{searchKey,jdbcType=VARCHAR}"%"
+
+        </if>
     </select>
 
     <insert id="insert">
-        insert into t_meta_model(id,
+        insert into t_meta_model(
             name_cn,
             name_en,
             name_abbr,
@@ -40,22 +47,17 @@
 
     <update id="update">
         update t_meta_model set
+            name_abbr = #{nameAbbr,jdbcType=VARCHAR},
+            name_cn =  #{nameCn,jdbcType=VARCHAR},
+            name_en =  #{nameEn,jdbcType=VARCHAR},
             f_desc = #{fDesc, jdbcType=VARCHAR},
-            last_update_by= #{fDesc, jdbcType=VARCHAR},
-            last_update_time) values(
-            #{nameCn,jdbcType=VARCHAR},
-            #{nameEn,jdbcType=VARCHAR},
-            #{nameAbbr,jdbcType=VARCHAR},
-            #{fDesc,jdbcType=VARCHAR},
-            #{createBy,jdbcType=VARCHAR},
-            now(),
-            #{lastUpdateBy,jdbcType=VARCHAR},
-            now()
-            )
+            last_update_by= #{lastUpdateBy,jdbcType=VARCHAR},
+            last_update_time = now()
+        where id = #{id, jdbcType=NUMERIC}
     </update>
 
     <delete id="delete">
-        delete from t_meta_model where id =#{id}
+        delete from t_meta_model where id = #{id}
     </delete>
 
 

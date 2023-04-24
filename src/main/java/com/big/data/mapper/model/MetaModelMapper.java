@@ -11,7 +11,7 @@ import java.util.List;
 public interface MetaModelMapper {
 
     //查询
-    List<MetaModel> query();
+    List<MetaModel> query(String searchKey);
 
     void insert(MetaModel metaModel);
 

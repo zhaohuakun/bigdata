@@ -52,3 +52,7 @@ spring:
 mybatis:
   mapper-locations: classpath*:/mapper/*/*.xml
   type-aliases-package: com.big.data.bean
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
